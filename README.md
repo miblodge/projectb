@@ -11,3 +11,5 @@ subdomains:
 - https://dana.blockpress.me
 - https://hkjn.blockpress.me
 - https://blockpress.me
+
+A github repository with a clean version of the code, without the example websites, and which will be used for further development can be found here: https://github.com/blockpress/blockpress.me
