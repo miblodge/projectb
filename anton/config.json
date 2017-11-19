@@ -1,15 +1,17 @@
 {
   "sitetitle": "Anton Channing",
+  "tagline":"Full Stack Web Developer!",
   "theme": "anton",
 
-	"modules": ["static","link"],
+	"modules": ["steem","static","link"],
+
+	"firstpage": {"type": "static", "args": ["home.html"]},
 
 	"menu": [
-    {"label": "Home", "type": "static", "args": ["home.html"]},
-    {"label": "Steem", "type": "static", "args": ["steemstream.html"]},
-    {"label": "Post", "type": "static", "args": ["steempost.html"]},
-  	{"label": "Dana", "type": "link", "args": ["https://dana.blockpress.me"]},
-  	{"label": "Henrik", "type": "link", "args": ["https://hkjn.blockpress.me"]},
-    {"label": "Blockpress.me", "type": "link", "args": ["https://blockpress.me"]}
+    {"label": "Home", "type": "static", "args": "home.html"},
+    {"label": "Profile", "type": "steem", "args": {"show":"profile", "user":"antonchanning"}},
+  	{"label": "Dana", "type": "link", "args": "https://dana.blockpress.me"},
+  	{"label": "Henrik", "type": "link", "args": "https://hkjn.blockpress.me"},
+    {"label": "Blockpress.me", "type": "link", "args": "https://blockpress.me"}
   ]
 }

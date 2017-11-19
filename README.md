@@ -11,5 +11,5 @@ subdomains:
 - https://blockpress.me
 
 ## See also
-* Server side setup: https://github.com/blockpress/blockpress.me-1
 * Clean version of the code: https://github.com/blockpress/blockpress.me
+* Server side setup: https://github.com/blockpress/blockpress.me-1
