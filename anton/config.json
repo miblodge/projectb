@@ -9,6 +9,7 @@
 
 	"menu": [
     {"label": "Home", "type": "static", "args": "home.html"},
+		{"label": "Ahoy there!", "type": "steem", "args": {"show":"post", "user":"antonchanning", "postid":"ahoy-there"}},
     {"label": "Profile", "type": "steem", "args": {"show":"profile", "user":"antonchanning"}},
   	{"label": "Dana", "type": "link", "args": "https://dana.blockpress.me"},
   	{"label": "Henrik", "type": "link", "args": "https://hkjn.blockpress.me"},
