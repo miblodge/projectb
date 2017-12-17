@@ -3,13 +3,13 @@
   "tagline":"The CMS with blockchains for its database...",
   "theme": "dark",
 
-	"modules": ["static","link"],
+	"modules": ["steem","static","link"],
+
+	"firstpage": {"type": "static", "args": ["home.html"]},
 
 	"menu": [
     {"label": "Blockpress", "type": "static", "args": ["home.html"]},
-    {"label": "Steem", "type": "static", "args": ["steem.html"]},
-    {"label": "Bitshares", "type": "static", "args": ["bitshares.html"]},
-    {"label": "Decent", "type": "static", "args": ["decent.html"]},
+	  {"label": "Steem Posts", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}},
   	{"label": "Anton", "type": "link", "args": ["https://anton.blockpress.me"]},
   	{"label": "Dana", "type": "link", "args": ["https://dana.blockpress.ne"]},
   	{"label": "Henrik", "type": "link", "args": ["https://hkjn.blockpress.me"]}
