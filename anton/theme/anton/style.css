@@ -105,6 +105,7 @@ a:active{
 
 #contentArea{
 	background-color: #0A2229;
+	color:#088A85;
 	width:70%;
 	margin-right:auto;
 	margin-left:auto;
@@ -164,7 +165,6 @@ a:active{
 	}
 	#contentArea p{
 		font-size: 80%;
-	  color:#088A85;
 		width: 70%;
 		margin-right:auto;
 		margin-left:auto;
@@ -283,4 +283,16 @@ a:active{
 	max-width: 50%;
 	margin-right:auto;
 	margin-left:auto;
+}
+/* Steem Posts */
+#contentArea img.steemposts_thumbnail {
+    max-width: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+.steem_posts_preview {
+    max-width: 70%;
+		padding-left: 10px;
+	display: inline-block;
+	vertical-align: top;
 }

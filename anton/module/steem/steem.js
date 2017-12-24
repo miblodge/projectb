@@ -1,5 +1,14 @@
 // Globals used in this module
-var steem_profile, steem_post, steem_posts, steem_tags;
+var steem_args, steem_profile, steem_post;
+
+// Steem profile variables
+var steem_profile_template,steem_profile;
+
+// Steem post variables
+var steem_post_template,steem_post;
+
+// Steem posts variables
+var steem_posts_template, steem_posts, steem_posts_displayed, steem_username, steem_tags, steem_posts_count;
 
 /* A special content module for pulling content from steem blockchain */
 function steem_menuitem(args) {
@@ -14,6 +23,7 @@ function steem_display(content) {
 	$('#contentArea').html(content);
 }
 function steem_load(args) {
+	steem_args = args;
 	console.log("Inside steem_load.");
 console.log('args: '+args);
 	args = JSON.parse(args.replace(/&quot;/g,'"'));
@@ -26,8 +36,11 @@ console.log('args JSON parsed: '+args);
 			getSteemProfile(args.user);
 			break;
 		case "posts":
-			getSteemPosts(args.user,args.tag);
-			console.log("Get posts for: user(s): "+args.user+", tag(s): "+args.tag);
+			// First clear contentArea, because we might need to make multiple calls to refill it.
+			$('#contentArea').html('');
+			steem_posts_displayed = new Array();
+			getSteemPosts(args.user,args.tag,args.count,'');
+			console.log("Get posts for: user(s): "+args.user+", tag(s): "+args.tag+", count: "+args.count);
 			break;
 		case "post":
 			getSteemPost(args.user,args.postid);
@@ -36,100 +49,131 @@ console.log('args JSON parsed: '+args);
 	}
 }
 
-function displaySteemPosts(posts_template) {
-	// Template should be stored in global steem_posts
-	var template = posts_template;
-	var json_metadata, post_obj, body, content = '';
+function displaySteemPosts(err, posts) {
+	var template = steem_posts_template;
+	// Save posts in global variable
+	console.log(posts);
+	steem_posts = posts;
+
+console.log("steem_username: "+steem_username);
+
+	var args = steem_args;
+console.log("displaySteemPosts args: "+args);
+	var content = '', display_count = steem_posts_displayed.length;
+	var json_metadata, post_tags, post_obj, body, show_post, last_date, last_permlink, loop_end = false;
 
 	var converter = new showdown.Converter();
 
 	// Loop through posts, populate the template and append it to contentArea
 	var post, postsLength = steem_posts.length;
-	for (var i = 0; i < postsLength; i++) {
+	for (var i = 0; i < postsLength && !loop_end; i++) {
 		post_obj = steem_posts[i];
 		json_metadata = JSON.parse(post_obj.json_metadata);
+		post_tags = json_metadata.tags;
 
-		console.log("Post "+i+": "+JSON.stringify(post_obj));
-		console.log("metadata "+i+": "+JSON.stringify(json_metadata));
+		show_post = false;
+		if(Array.isArray(steem_tags.isArray)) {
+			for(var j =0; j < steem_tags.length; j++) {
+				if(post_tags.indexOf(steem_tags[j]) !== -1) show_post = true;
+			}
+		}
+		else if(steem_tags === '') show_post = true;
+		else if(post_tags.indexOf(steem_tags) !== -1) show_post = true;
 
-		// Insert post values for this post
-		template = template.replace('{steem_post_tag}',post_obj.category);
-		template = template.replace('{steem_post_title}',post_obj.title);
-		template = template.replace('{steem_post_permlink}',post_obj.permlink);
-		template = template.replace('{steem_post_img}',json_metadata.image);
+		//console.log("Post "+i+": "+JSON.stringify(post_obj));
+		//console.log("metadata "+i+": "+JSON.stringify(json_metadata));
 
-		// Full body
-		body = converter.makeHtml(post_obj.body);
-		template = template.replace('{steem_post_body}',body);
+		console.log("permlink "+i+": "+JSON.stringify(post_obj.permlink));
+		console.log("created "+i+": "+JSON.stringify(post_obj.created));
 
-		// Body preview
-		body = body.replace(/<(?:.|\n)*?>/gm, ''); //strip html
-		if(body.length > 250) body = body.substring(0,247)+'...';
-		template = template.replace('{steem_post_preview}',body);
+		if(steem_posts_displayed.indexOf(post_obj.permlink) !== -1) {
+			//loop_end = true;
+			show_post = false;
+		} else {
+			last_permlink = post_obj.permlink;
+	console.log("Last permlink: "+last_permlink);
+		}
 
-		// Append post to content string if it has a matching tag
-		content += template;
-		//Reset template
-		var template = posts_template;
+		if(show_post) {
+			steem_posts_displayed.push(post_obj.permlink);
+			display_count++;
+			//template+="post_obj "+i+": "+JSON.stringify(post_obj)+"<br><br>";
+			//template+="json_metadata "+i+": "+JSON.stringify(json_metadata);
+
+			// Insert post values for this post
+			template = template.replace('{steem_posts_tag}',post_obj.category);
+			template = template.replace('{steem_posts_title}',post_obj.title);
+			template = template.replace('{steem_posts_permlink}',post_obj.permlink);
+			template = template.replace('{steem_posts_img}',json_metadata.image);
+			template = template.replace('{steem_posts_author}',post_obj.author);
+
+			// Full body
+			body = converter.makeHtml(post_obj.body);
+			template = template.replace('{steem_posts_body}',body);
+
+			// Body preview
+			body = body.replace(/<(?:.|\n)*?>/gm, ''); //strip html
+			if(body.length > 250) body = body.substring(0,247)+'...';
+			template = template.replace('{steem_posts_preview}',body);
+
+			// Append post to content string if it has a matching tag
+			content += template;
+			//Reset template
+			var template = steem_posts_template;
+		}
 	}
-
+	if(display_count < steem_posts_count && !loop_end) {
+console.log("displaySteemPosts b4 getSteemPosts");
+console.log("username: "+steem_username);
+console.log("steem_tags: "+steem_tags);
+console.log("steem_posts_count: "+steem_posts_count);
+console.log("last_permlink: "+last_permlink);
+		getSteemPosts(steem_username,steem_tags,steem_posts_count,last_permlink);
+	}
+	if(loop_end) console.log('Blocked infinite loop. Quitting...');
+	if(display_count >= steem_posts_count) {
+		console.log('Reached post limit. Quitting...');
+		console.log(steem_posts_displayed);
+	}
 	// Append content to contentArea
 	$('#contentArea').append(content);
 }
-function getSteemPostsTemplate(err,posts) {
-	// Save profile in global variable
-	console.log(posts);
-	steem_posts = posts;
-
-	// Get template from theme
-	var theme_template = "/theme/"+config.theme+"/steem-posts.html";
-	$.ajax(theme_template).done(displaySteemProfile).fail(function(){
-		// Else use default template
-		$.ajax("/module/steem/steem-posts.html").done(displaySteemPosts);
-	});
-
-	content = 'posts';
-}
-function getSteemPosts(usernames,tags) {
-	// First clear contentArea, because we might need to make multiple calls to refill it.
-	$('#contentArea').html('');
+function getSteemPosts(usernames,tags,count,lastPermlink) {
+console.log('getSteemPosts usernames: '+usernames+' tags: '+tags+' count: '+count+' lastPermlink: '+lastPermlink);
+	if (typeof count === "undefined") count=10; // Default to 10 if no count specified.
+	if (typeof lastPermlink === "undefined") lastPermlink=''; // Default to 10 if no count specified.
 
 	steem_tags = tags;
-console.log('usernames: '+usernames);
-	steem.api.getDiscussionsByAuthorBeforeDate(usernames, '', '2100-01-01T00:00:00', 10,	function(err, result){getSteemPostsTemplate(err, result)});
+	steem_posts_count = count;
+	steem_username = usernames;
+console.log('usernames: '+usernames+' tags: '+tags+' count: '+count+' lastPermlink: '+lastPermlink);
+
+	steem.api.getDiscussionsByAuthorBeforeDate(usernames, lastPermlink, '2100-01-01T00:00:00', count,	function(err, result){displaySteemPosts(err, result)});
 	//displaySteemPosts(['AAA']);
 }
 
-function displaySteemPost(post) {
-	content = post;
+function displaySteemPost(err, post) {
+	// Save post in global variable
+	steem_post = post;
+
+	var template = steem_post_template;
+
 	// Display template
-	$('#contentArea').html(content);
+	$('#contentArea').html(template);
 
 		console.log(steem_post.body);
-
+// Convert markdown into html
 	var converter = new showdown.Converter();
 	var body_html = converter.makeHtml(steem_post.body);
 
 	console.log(body_html);
 	// Then add post values
 	$("#steem-post-content").html(body_html);
-}
-function getSteemPostTemplate(err, post) {
-	// Save profile in global variable
-	steem_post = post;
-
-	// Get template from theme
-	var theme_template = "/theme/"+config.theme+"/steem-post.html";
-	$.ajax(theme_template).done(displaySteemProfile).fail(function(){
-		// Else use default template
-		$.ajax("/module/steem/steem-post.html").done(displaySteemPost);
-	});
-
-	content = 'post';
+	$("#steem-post-title").html(steem_post.title);
 }
 function getSteemPost(username,postid) {
 	//
-	steem.api.getContent(username, postid,	function(err, result){getSteemPostTemplate(err, result)});
+	steem.api.getContent(username, postid,	function(err, result){displaySteemPost(err, result)});
 }
 
 function simpleReputation(raw_reputation) {
@@ -140,13 +184,20 @@ function simpleReputation(raw_reputation) {
 	return simple_reputation;
 }
 
-function displaySteemProfile(template) {
+function displaySteemProfile(err, profile) {
+	// Save profile in global variable
+	steem_profile = profile[0];
+	template = steem_profile_template;
 	console.log(steem_profile);
+
+	var metadata = JSON.parse(steem_profile.json_metadata);
+	template = template.replace('{steem_profile_website}','<a href="'+metadata.profile.website+'">'+metadata.profile.website+'</a>');
+template = template.replace('{steem_profile_location}',metadata.profile.location);
 	// Display template
 	$('#contentArea').html(template);
 
 	// Then add profile values
-	var metadata = JSON.parse(steem_profile.json_metadata);
+
 	console.log(metadata.profile);
 	console.log("profile image: "+metadata.profile.profile_image);
 	$("#profile-banner").css("background","url("+metadata.profile.cover_image+") no-repeat");
@@ -159,26 +210,14 @@ function displaySteemProfile(template) {
 	$("#profile-location").html(metadata.profile.location);
 	$("#profile-website").html('<a href="'+metadata.profile.website+'">'+metadata.profile.website+'</a>');
 }
-function getSteemProfileTemplate(err, profile) {
-	// Save profile in global variable
-	steem_profile = profile[0];
-
-	// Get template from theme
-	var theme_template = "/theme/"+config.theme+"/steem-profile.html";
-	$.ajax(theme_template).done(displaySteemProfile).fail(function(){
-		// Else use default template
-		$.ajax("/module/steem/steem-profile.html").done(displaySteemProfile);
-	});
-
-}
 function getSteemProfile(username) {
 	//
-	steem.api.getAccounts([username],	function(err, profile){getSteemProfileTemplate(err, profile)});
+	steem.api.getAccounts([username],	function(err, profile){displaySteemProfile(err, profile)});
 }
 
 //Load the showdown library (for parsing markdown)
 $.getScript( "lib/showdown/showdown.min.js").done(function( script, textStatus ) {
-		console.log( textStatus );
+		//console.log( textStatus );
 		console.log( "showdown.min.js load was performed." );
 	})
 	.fail(function( jqxhr, settings, exception ) {
@@ -191,8 +230,44 @@ $.getScript( "lib/showdown/showdown.min.js").done(function( script, textStatus )
 
 //Load the steem javascript API
 $.getScript( "lib/steem-js/steem.min.js", function( data, textStatus, jqxhr ) {
-	console.log( data ); // Data returned
-	console.log( textStatus ); // Success
-	console.log( jqxhr.status ); // 200
+	//console.log( data ); // Data returned
+	//console.log( textStatus ); // Success
+	//console.log( jqxhr.status ); // 200
 	console.log( "steem.min.js load was performed." );
 });
+
+//Template loaded functions
+function steemProfileTemplateLoaded(template) {
+	steem_profile_template = template;
+	console.log( "steem ProfileTemplate load was performed." );
+}
+function steemPostTemplateLoaded(template) {
+	steem_post_template = template;
+	console.log( "steem PostTemplate load was performed." );
+}
+function steemPostsTemplateLoaded(template) {
+	steem_posts_template = template;
+	console.log( "steem PostsTemplate load was performed." );
+}
+//Load the templates
+function loadSteemTemplates() {
+	// Get template from theme
+	var theme_template = "/theme/"+config.theme+"/steem-profile.html";
+	$.ajax(theme_template).done(steemProfileTemplateLoaded).fail(function(){
+		// Else use default template
+		$.ajax("/module/steem/steem-profile.html").done(steemProfileTemplateLoaded);
+	});
+	// Get template from theme
+	var theme_template = "/theme/"+config.theme+"/steem-post.html";
+	$.ajax(theme_template).done(steemPostTemplateLoaded).fail(function(){
+		// Else use default template
+		$.ajax("/module/steem/steem-post.html").done(steemPostTemplateLoaded);
+	});
+	// Get template from theme
+	var theme_template = "/theme/"+config.theme+"/steem-posts.html";
+	$.ajax(theme_template).done(steemPostsTemplateLoaded).fail(function(){
+		// Else use default template
+		$.ajax("/module/steem/steem-posts.html").done(steemPostsTemplateLoaded);
+	});
+}
+loadSteemTemplates();
