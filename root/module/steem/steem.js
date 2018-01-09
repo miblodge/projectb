@@ -249,6 +249,9 @@ $.getScript( "lib/steem-js/steem.min.js", function( data, textStatus, jqxhr ) {
 	//console.log( textStatus ); // Success
 	//console.log( jqxhr.status ); // 200
 	console.log( "steem.min.js load was performed." );
+	
+	// temporary fix for deprecated websockets issue...
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
 });
 
 //Template loaded functions
