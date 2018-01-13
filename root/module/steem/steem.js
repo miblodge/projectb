@@ -30,6 +30,9 @@ function steem_load(args) {
 //console.log('args JSON parsed: '+args);
 	//console.log(args.show);
 
+	// temporary fix for deprecated websockets issue...
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
+	
 	switch(args.show) {
 		case "profile":
 			//console.log("Get profile of: "+args.user);
