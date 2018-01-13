@@ -11,5 +11,7 @@
   	{"label": "Henrik", "type": "link", "args": ["https://hkjn.blockpress.me"]},
   	{"label": "Anton", "type": "link", "args": ["https://anton.blockpress.me"]},
     {"label": "Blockpress.me", "type": "link", "args": ["https://blockpress.me"]}
-  ]
+  ],
+
+	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
 }

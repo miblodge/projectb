@@ -9,10 +9,9 @@
 
 	"menu": [
     {"label": "Home", "type": "static", "args": "home.html"},
-	  {"label": "SteemSwitch", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"steemswitch"}},
-	  {"label": "BlockPress", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}},
-  	{"label": "Dana", "type": "link", "args": "https://dana.blockpress.me"},
-  	{"label": "Henrik", "type": "link", "args": "https://hkjn.blockpress.me"},
-    {"label": "Blockpress.me", "type": "link", "args": "https://blockpress.me"}
-  ]
+	  {"label": "BlockPress", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress", "count":10}},
+	  {"label": "SteemSwitch", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"steemswitch", "count":10}}
+  ],
+
+	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
 }
