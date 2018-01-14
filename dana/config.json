@@ -2,15 +2,14 @@
   "sitetitle": "Dana Varahi",
   "theme": "dana",
 
-	"modules": ["static","link"],
+	"modules": ["steem","static"],
+
+		"firstpage": {"type": "static", "args": ["home.html"]},
 
 	"menu": [
-    {"label": "Home", "type": "static", "args": ["home.html"]},
-    {"label": "Video", "type": "static", "args": ["video.html"]},
-    {"label": "Audio", "type": "static", "args": ["audio.html"]},
-  	{"label": "Henrik", "type": "link", "args": ["https://hkjn.blockpress.me"]},
-  	{"label": "Anton", "type": "link", "args": ["https://anton.blockpress.me"]},
-    {"label": "Blockpress.me", "type": "link", "args": ["https://blockpress.me"]}
+	  {"label": "Home", "type": "static", "args": ["home.html"]},
+		{"label": "Profile", "type": "steem", "args": {"show":"profile", "user":"dana-varahi"}},
+	  {"label": "Blog", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"", "count":10}}
   ],
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}

@@ -9,10 +9,8 @@
 
 	"menu": [
     {"label": "Blockpress", "type": "static", "args": ["home.html"]},
-	  {"label": "Steem Posts", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}},
-  	{"label": "Anton", "type": "link", "args": ["https://anton.blockpress.me"]},
-  	{"label": "Dana", "type": "link", "args": ["https://dana.blockpress.ne"]},
-  	{"label": "Henrik", "type": "link", "args": ["https://hkjn.blockpress.me"]}
+	  {"label": "Team", "type": "static", "args": ["team.html"]},
+	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}}
   ],
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}

@@ -102,6 +102,11 @@ a:active{
 	border-radius: 10px;
 	color: #04B486;
 }
+#contentArea img.flowleft{
+	float:left;
+	vertical-align: top;
+	margin-right: 1em;
+}
 
 #contentArea{
 	background-color: #160909;
