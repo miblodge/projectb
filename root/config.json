@@ -10,6 +10,7 @@
 	"menu": [
     {"label": "Blockpress", "type": "static", "args": ["home.html"]},
 	  {"label": "Team", "type": "static", "args": ["team.html"]},
+	  {"label": "Pitch", "type": "static", "args": ["pitch.html"]},
 	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}}
   ],
 
