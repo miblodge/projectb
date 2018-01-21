@@ -1,6 +1,12 @@
 {
   "sitetitle": "Dana Varahi",
+	"pallete": "",
   "theme": "dana",
+
+	"themeoptions": {
+		"banner_image": "",
+		"site_image": ""
+	},
 
 	"modules": ["steem","static"],
 
@@ -11,6 +17,18 @@
 		{"label": "Profile", "type": "steem", "args": {"show":"profile", "user":"dana-varahi"}},
 	  {"label": "Blog", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"", "count":10}}
   ],
+
+	"socialmenu": {
+		"steemit": "https://steemit.com/trending/blockpress",
+		"github": "https://github.com/blockpress/blockpress.me",
+		"linkedin": "",
+		"twitter": "",
+		"facebook": "",
+		"gplus": "",
+		"stackoverflow": "",
+		"link_url": "https://blockpress.me",
+		"email": ""
+	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
 }

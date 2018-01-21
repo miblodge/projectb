@@ -1,7 +1,13 @@
 {
   "sitetitle": "Blockpress.me",
   "tagline":"The CMS with blockchains for its database...",
+	"pallete": "",
   "theme": "dark",
+
+	"themeoptions": {
+		"banner_image": "",
+		"site_image": ""
+	},
 
 	"modules": ["steem","static","link"],
 
@@ -13,6 +19,18 @@
 	  {"label": "Pitch", "type": "static", "args": ["pitch.html"]},
 	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}}
   ],
+
+	"socialmenu": {
+		"steemit": "https://steemit.com/trending/blockpress",
+		"github": "https://github.com/blockpress/blockpress.me",
+		"linkedin": "",
+		"twitter": "",
+		"facebook": "",
+		"gplus": "",
+		"stackoverflow": "",
+		"link_url": "https://blockpress.me",
+		"email": ""
+	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
 }
