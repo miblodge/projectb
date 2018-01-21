@@ -1,8 +1,8 @@
 {
   "sitetitle": "Blockpress.me",
   "tagline":"The CMS with blockchains for its database...",
-	"pallete": "",
-  "theme": "dark",
+	"pallete": "chocorange",
+  "theme": "simple",
 
 	"themeoptions": {
 		"banner_image": "",
