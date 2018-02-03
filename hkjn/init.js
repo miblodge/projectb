@@ -1,13 +1,6 @@
 var config, modules_to_load;
 
 /*** Functions for handling config.json ***/
-// Load config.json
-function getConfigJSON() {
-  return $.ajax({
-    type: 'GET',
-    url: "config.json"
-  });
-}
 // Parse config.json once loaded...
 function parseConfig(config_json) {
   if(typeof config_json ==='string') config_json = JSON.parse(config_json);
@@ -17,6 +10,9 @@ function parseConfig(config_json) {
 // Failed to load config.json
 function configFail() {
   console.log('FAILED TO LOAD CONFIG!');
+	// Load default theme and display error page.
+	config={"sitetitle": "Error loading config","pallete":"vanilla","theme":"simple","modules":["static"],"firstpage":{"type":"static","args":["content/default/config_load_error.html"]},"menu":[]};
+  parseModules(config.modules);
 }
 
 /*** Functions for loading the content modules ***/
@@ -51,7 +47,7 @@ function parsePallete(pallete) {
   $("<link/>", {
      rel: "stylesheet",
      type: "text/css",
-     href: "/pallete/"+pallete+"/pallete.css"
+     href: "./pallete/"+pallete+".css"
   }).appendTo("head");
 }
 /*** Functions for parsing themes ***/
@@ -63,14 +59,14 @@ function parseTheme(theme) {
   $("<link/>", {
      rel: "stylesheet",
      type: "text/css",
-     href: "/theme/"+theme+"/style.css"
+     href: "./theme/"+theme+"/style.css"
   }).appendTo("head");
 }
 // Load the theme template
 function getThemeHTML(theme) {
   return $.ajax({
     type: 'GET',
-    url: "/theme/"+theme+"/template.html"
+    url: "./theme/"+theme+"/template.html"
   });
 }
 // Theme template failed to load...
@@ -81,8 +77,9 @@ function themeHTMLFail() {
 function parseThemeHTML(themeHTML) {
 	themeHTML = themeHTML.replace(/{sitetitle}/g,config.sitetitle);
   $(document.body).html(themeHTML);
-  if(typeof config.themeoptions == "string" && typeof config.themeoptions.banner_image == "string" && config.themeoptions.banner_image != "") {
+  if(typeof config.themeoptions == "object" && typeof config.themeoptions.banner_image == "string" && config.themeoptions.banner_image != "") {
 		$('.banner_image').css("background-image",config.themeoptions.banner_image);
+    console.log('banner_image: '+config.themeoptions.banner_image);
 	}
   $('#sitetitle').text(config.sitetitle);
   $('#tagline').text(config.tagline);
@@ -193,5 +190,9 @@ function parseSocialMenu() {
 
 // JQuery ready function that is called once document has loaded.
 $(document).ready(function() {
-	getConfigJSON().done(parseConfig).fail(configFail);
+	// Get local config
+	$.ajax("local_config.json").done(parseConfig).fail(function(){
+		// Else load default config on failure
+		$.ajax("config.json").done(parseConfig).fail(configFail);
+	});
 });

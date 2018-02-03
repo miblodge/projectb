@@ -1,31 +1,38 @@
 {
-  "sitetitle": "HKJN",
-	"tagline": "",
-	"pallete": "",
-  "theme": "henrik",
+  "sitetitle": "Blockpress.me",
+  "tagline":"The CMS with blockchains for its database...",
+	"pallete": "chocorange",
+  "theme": "simple",
 
 	"themeoptions": {
 		"banner_image": "",
 		"site_image": ""
 	},
 
-	"modules": ["static","link"],
+	"modules": ["static","steem"],
+
+	"steem_options": {
+		"": ""
+	},
+
+	"firstpage": {"type": "static", "args": ["content/default/welcome_to_blockpress.html"]},
 
 	"menu": [
-    {"label": "Home", "type": "static", "args": ["home.html"]},
-  	{"label": "Trackers", "type": "static", "args": ["trackers.html"]}
+    {"label": "Home", "type": "static", "args": "content/default/welcome_to_blockpress.html"},
+	  {"label": "Anton's Posts", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress", "count":10}},
+	  {"label": "Dana's Posts", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"blockpress", "count":10}}
   ],
 
 	"socialmenu": {
-		"steemit": "",
-		"github": "https://github.com/hkjn",
-		"linkedin": "https://www.linkedin.com/in/hekjon",
-		"twitter": "https://twitter.com/hkjn",
-		"facebook": "https://www.facebook.com/hekjon",
-		"gplus": "https://plus.google.com/+HenrikJonsson",
+		"steemit": "https://steemit.com/trending/blockpress",
+		"github": "https://github.com/blockpress/blockpress.me",
+		"linkedin": "",
+		"twitter": "",
+		"facebook": "",
+		"gplus": "",
 		"stackoverflow": "",
-		"link_url": "https://hkjn.me/index",
-		"email": "me@hkjn.me"
+		"link_url": "https://blockpress.me",
+		"email": ""
 	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}

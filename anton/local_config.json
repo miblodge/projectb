@@ -1,0 +1,35 @@
+{
+  "sitetitle": "Anton Channing",
+  "tagline":"Full Stack Web Developer!",
+	"pallete": "",
+  "theme": "anton",
+
+	"themeoptions": {
+		"banner_image": "",
+		"site_image": ""
+	},
+
+	"modules": ["steem","static","link"],
+
+	"firstpage": {"type": "static", "args": ["home.html"]},
+
+	"menu": [
+    {"label": "Home", "type": "static", "args": "home.html"},
+	  {"label": "Projects", "type": "static", "args": "projects.html"},
+	  {"label": "Blog", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"", "count":10}}
+  ],
+
+	"socialmenu": {
+		"steemit": "https://steemit.com/@antonchanning",
+		"github": "https://github.com/antonchanning",
+		"linkedin": "https://www.linkedin.com/in/anthony-channing-widmanski/",
+		"twitter": "https://twitter.com/antonchanning",
+		"facebook": "https://www.facebook.com/antonchanning",
+		"gplus": "https://plus.google.com/u/0/+AntonChanning",
+		"stackoverflow": "https://stackoverflow.com/users/641534/antonchanning",
+		"link_url": "https://antonchanning.com",
+		"email": "antonchanning@protonmail.com"
+	},
+
+	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
+}

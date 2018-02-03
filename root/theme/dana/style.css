@@ -1,61 +1,77 @@
+
+html{
+	margin: 0;
+	padding: 0;
+}
+
 body{
 	width: 100%;
 	margin:0;
-	text-align:justified;
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-family: "Garamond", "Palatino", serif;
 	font-size: 1.3em;
-  background-color:#E6E6E6;
 }
+
 header{
-  padding:1em;
-  border-radius: 6px;
+	background-image: url("https://steemitimages.com/DQmUgGiwvvq39ig4UbY1GXYNboTjQtS4QiRiy5kEPanu4KZ/banner2.JPGx");
+	background-repeat: no-repeat;
+  background-size:cover;
+	background-position: center;
+	padding:0;
+	margin:0;
+}
+
+div#banner-gradient { margin-top: 0;}
+
+button#openNav{
+	font-size: 2em;
+	margin-left: 1em;
+	border:none;
+	position: fixed;
+	top:0.5em;
+	border-radius: 5px;
+	padding-bottom: 0.2em;
+	opacity: 0.7;
 }
 
 h1{
-    font: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color:#045FB4;
-    margin-bottom: 0.5em;
-    text-align: center;
-		padding-top:0.5em;
+  font-family: "Garamond", "Palatino", serif;
+	font-size: 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+	padding-top:0.5em;
+	margin-top: 0;
+
 }
 
 h2{
-    font: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color:#045FB4;
-    margin-bottom: 0.5em;
-    text-align: left;
-		width: 70%;
-		margin-right:auto;
-		margin-left:auto;
-		padding-bottom: 0.5em;
-}
-h3{
-    font: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color:#045FB4;
-    margin-bottom: 0.5em;
-    text-align: left;
-		width: 70%;
-		margin-right:auto;
-		margin-left:auto;
-		padding-bottom: 0.5em;
-}
-
-p{
-  color:black;
+	font-family: "Garamond", "Palatino", serif;
+	font-size: 1.5em;
+  margin-bottom: 0.5em;
+  text-align: left;
 	width: 70%;
 	margin-right:auto;
 	margin-left:auto;
+	padding-bottom: 0.5em;
+
+}
+h3{
+  font-family: "Garamond", "Palatino", serif;
+	font-size: 1.3em;
+  margin-bottom: 0.5em;
+  text-align: left;
+	width: 70%;
+	margin-right:auto;
+	margin-left:auto;
+	padding-bottom: 0.5em;
+
 }
 
-a:link {
-  text-decoration: none;
-	color:#045FB4;
-}
-a:visited{
-	color:#045FB4;
-}
-a:hover{
-	color:#819FF7;
+p{
+	font-family: "Garamond", "Palatino", serif;
+	font-size: 1em;
+	width: 70%;
+	margin-right:auto;
+	margin-left:auto;
 }
 
 img{
@@ -63,43 +79,117 @@ img{
 	margin-right:auto;
 	margin-left:auto;
 	border-radius: 10px;
-	color: #04B486;
-}
-.menu ul{
-  list-style: none;
-  text-align: center;
-	margin-left: 0;
-	padding-left: 0;
-}
-.menu li {
-  display: inline-block;
-  padding:8px;
-  font-size: 1em;
-  text-transform: uppercase;
-  background-color:#9F81F7;
-  border-radius: 5px;
-	margin-left: 0.3em;
-	margin-right: 0.3em;
 }
 
-.menu li:hover{
-  background-color:#7F61c7;
+a { text-decoration: none;}
+
+#leftpad{
+	padding: 0;
+	margin: 0;
 }
+
+/* sidebar styles menu and 'footer'*/
+
+.sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding-top: 20px;
+		text-align: center;
+		display:none;
+
+}
+
+button#closeNav{
+	margin-bottom:1em;
+	font-size: 1em;
+	border: none;
+	border-radius: 5px;
+	padding: 0 5px 2px 5px;
+}
+
+.sidebar a {
+    text-decoration: none;
+		text-align: center;
+}
+
+.menu div{
+	text-align: center;
+	list-style: none;
+	text-align: center;
+	flex-wrap: wrap;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	margin-bottom: 1em;
+}
+
+.menu span{
+  display: block;
+  font-size: 1.25em;
+  text-transform: uppercase;
+	width: 100%;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	margin-bottom: 1px;
+}
+
+.menu span a { text-decoration:none;}
+
+footer div{
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 2em;
+	padding-right: 2em;
+	font-size: 0.8em;
+	list-style: none;
+  text-align: center;
+}
+
+footer span{
+	display: block;
+	margin: 0.5em;
+	font-size: 1em;
+	font-style: normal;
+}
+
+ div.icon span a:link{
+	display: inline-block;
+	text-decoration: none;
+	font-style: oblique;
+	height: 45px;
+	width: 45px;
+	padding:0;
+	border-radius: 5px;
+	margin-bottom: 0.5em;
+}
+
+ div.icon img{
+	margin: 0;
+	max-width: 100%;
+}
+
+/* content area styles*/
+
 #contentArea{
-  font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	background-color: #D8CEF6;
+  font-family: "Garamond", "Palatino", serif;
 	width:70%;
 	margin-right:auto;
 	margin-left:auto;
+	margin-top: 1em;
+	margin-bottom: 2em;
 	border-style:solid;
 	border-width: 1px;
-	border-color: #585858;
-	border-radius: 10px;
 	padding:1em;
 }
+
 #contentArea h1{
-    font: 120% "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color:#9F81F7;
+    font-family: "Garamond", "Palatino", serif;
+		font-size: 1.3em;
+		font-weight: bold;
     margin-bottom: 0.5em;
     text-align: left;
 		width: 70%;
@@ -108,17 +198,20 @@ img{
 }
 
 #contentArea h2{
-    font: 110% "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color:#9F81F7;
+    font-family: "Garamond", "Palatino", serif;
+		font-size: 1.2em;
+		font-weight: bold;
     margin-bottom: 0.5em;
     text-align: left;
 		width: 70%;
 		margin-right:auto;
 		margin-left:auto;
 }
+
 #contentArea h3{
-    font: 100% "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color:#9F81F7;
+    font-family: "Garamond", "Palatino", serif;
+		font-size: 1.1em;
+		font-weight: lighter;
     margin-bottom: 0.5em;
     text-align: left;
 		width: 70%;
@@ -128,57 +221,131 @@ img{
 
  #contentArea ul{
 	  display: block;
-    list-style-type: disc;
+    list-style-type: none;
 		width: 70%;
 		margin-right:auto;
 		margin-left:auto;
 
 }
- #contentArea li{
-     font: 80% "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	  color:black;
-		width: 70%;
-		margin-right:auto;
-		margin-left:auto;
-		padding: 0.5em;
+
+ #contentArea ul li{
+	list-style: none;
+	font-size: 1em;
+	margin-right:auto;
+	margin-left: 2em;
+	padding: 0.5em;
+}
+
+	#contentArea ul li::before {
+		content: "\25C8"; /* Unicode of character to precede the list item */
+	  font-size: 1em;
+		padding-right: 1em;
 	}
+
 	#contentArea p{
-	    font: 90% "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	  color:black;
-		width: 70%;
+    font-family: "Garamond", "Palatino", serif;
+		font-size: 1em;
+		width: 90%;
 		margin-right:auto;
 		margin-left:auto;
 		text-align: left;
 	}
-	#contentArea a {
-	  text-decoration: none;
-		color: #9F81F7;
+
+	div.steem_posts_meta{
+		margin-bottom: 0.5em;
+		font-style: italic;
 	}
 
-	#contentArea a:hover{
-		color:#819FF7;
+	/* Steem Profile */
+
+	#steem_profile{
+		text-align: center;
+		font-size: 1em;
 	}
 
-#footer-menu li{
-	display: inline-block;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 2em;
-	padding-right: 2em;
+	#steem_profile h1{ text-align: center;}
+
+	#profile-image {
+		vertical-align: middle;
+		margin-top: 15px;
+	}
+
+	#profile-image img {
+		display:block;
+		margin: 0 auto;
+		max-width: 100%;
+		border-radius: 50%;
+		margin-bottom: 1em;
+
+	}
+	#profile-about {
+		max-width: 50%;
+		margin-right:auto;
+		margin-left:auto;
+	}
+
+	#profile-info {
+		max-width: 70%;
+		margin-right:auto;
+		margin-left:auto;
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+
+	#profile-info span{
+		margin-left: 1em;
+		margin-right: 1em;
+	}
+
+
+	/*Steem Post*/
+
+	#contentArea #steem-post img{
+		width: 90%;
+		max-width: 90%;
+		border-radius: 0;
+		padding: 0;
+		margin: 0;
+		border: none;
+	}
+
+	@media only screen and (max-width: 800px) {
+
+		.sidebar {
+		    height: 100%;
+		    padding-top: 20px;
+				text-align: center;
+				display:block;
+				position:static;
+				width:100%;
+		}
+
+		button#closeNav, button#openNav{ display: none;}
+
+		#contentArea{
+			width: 100% !important;
+			margin-left: 0;
+			margin-right: 0;
+			padding: 0;
+			padding-bottom: 1em;
+			border-left: none;
+			border-right: none;
+		}
+
+.steem_posts_preview, .steem_posts_author, #steem-post-comments {
+			margin-left: 1em;
+			display: block;
+		}
+
+.steem_posts_date{
+	margin-left: 1em;
+	display:block;
 	font-size: 0.8em;
 }
-#footer-menu li a:link{
-	text-decoration: none;
-	font-style: oblique;
-	color:#045FB4;
+
+#leftpad{
+	padding-left:0 !important;
+	margin: 0;
 }
-#footer-menu li a:visited{
-	color:#045FB4;
-}
-#footer-menu li a:hover{
-	color:#819FF7;
-}
-#footer-menu ul{
-  list-style: none;
-  text-align: center;
+
 }

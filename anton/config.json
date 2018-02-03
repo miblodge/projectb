@@ -1,34 +1,38 @@
 {
-  "sitetitle": "Anton Channing",
-  "tagline":"Full Stack Web Developer!",
-	"pallete": "",
-  "theme": "anton",
+  "sitetitle": "Blockpress.me",
+  "tagline":"The CMS with blockchains for its database...",
+	"pallete": "chocorange",
+  "theme": "simple",
 
 	"themeoptions": {
 		"banner_image": "",
 		"site_image": ""
 	},
 
-	"modules": ["steem","static","link"],
+	"modules": ["static","steem"],
 
-	"firstpage": {"type": "static", "args": ["home.html"]},
+	"steem_options": {
+		"": ""
+	},
+
+	"firstpage": {"type": "static", "args": ["content/default/welcome_to_blockpress.html"]},
 
 	"menu": [
-    {"label": "Home", "type": "static", "args": "home.html"},
-	  {"label": "Projects", "type": "static", "args": "projects.html"},
-	  {"label": "Blog", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"", "count":10}}
+    {"label": "Home", "type": "static", "args": "content/default/welcome_to_blockpress.html"},
+	  {"label": "Anton's Posts", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress", "count":10}},
+	  {"label": "Dana's Posts", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"blockpress", "count":10}}
   ],
 
 	"socialmenu": {
-		"steemit": "https://steemit.com/@antonchanning",
-		"github": "https://github.com/antonchanning",
-		"linkedin": "https://www.linkedin.com/in/anthony-channing-widmanski/",
-		"twitter": "https://twitter.com/antonchanning",
-		"facebook": "https://www.facebook.com/antonchanning",
-		"gplus": "https://plus.google.com/u/0/+AntonChanning",
-		"stackoverflow": "https://stackoverflow.com/users/641534/antonchanning",
-		"link_url": "https://antonchanning.com",
-		"email": "antonchanning@protonmail.com"
+		"steemit": "https://steemit.com/trending/blockpress",
+		"github": "https://github.com/blockpress/blockpress.me",
+		"linkedin": "",
+		"twitter": "",
+		"facebook": "",
+		"gplus": "",
+		"stackoverflow": "",
+		"link_url": "https://blockpress.me",
+		"email": ""
 	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}

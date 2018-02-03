@@ -40,7 +40,7 @@ function steem_load(args) {
 			$('#contentArea').html('');
 			steem_posts_displayed = new Array();
 			getSteemPosts(args.user,args.tag,args.count,'');
-			console.log("Get posts for: user(s): "+args.user+", tag(s): "+args.tag+", count: "+args.count);
+			//console.log("Get posts for: user(s): "+args.user+", tag(s): "+args.tag+", count: "+args.count);
 			break;
 		case "post":
 			getSteemPost(args.user,args.postid);
@@ -94,10 +94,9 @@ function displaySteemPosts(err, posts) {
 		if(steem_posts_displayed.indexOf(post_obj.permlink) !== -1) {
 			//loop_end = true;
 			show_post = false;
-	console.log("Duplicate. Ignore: "+last_permlink);
 		} else {
 			last_permlink = post_obj.permlink;
-	console.log("Last permlink: "+last_permlink);
+	//console.log("Last permlink: "+last_permlink);
 		}
 
 		if(show_post) {
@@ -131,8 +130,6 @@ function displaySteemPosts(err, posts) {
 			//Reset template
 			var template = steem_posts_template;
 		}
-		//console.log("posts: "+postsLength+"/"+steem_posts_count);
-		if(postsLength<steem_posts_count) loop_end=true; // Got less than we wanted, display no more.
 	}
 	if(display_count < steem_posts_count && !loop_end) {
 //console.log("username: "+steem_username);
@@ -275,19 +272,19 @@ function loadSteemTemplates() {
 	var theme_template = "/theme/"+config.theme+"/steem-profile.html";
 	$.ajax(theme_template).done(steemProfileTemplateLoaded).fail(function(){
 		// Else use default template
-		$.ajax("/module/steem/steem-profile.html").done(steemProfileTemplateLoaded);
+		$.ajax("./module/steem/steem-profile.html").done(steemProfileTemplateLoaded);
 	});
 	// Get template from theme
 	var theme_template = "/theme/"+config.theme+"/steem-post.html";
 	$.ajax(theme_template).done(steemPostTemplateLoaded).fail(function(){
 		// Else use default template
-		$.ajax("/module/steem/steem-post.html").done(steemPostTemplateLoaded);
+		$.ajax("./module/steem/steem-post.html").done(steemPostTemplateLoaded);
 	});
 	// Get template from theme
 	var theme_template = "/theme/"+config.theme+"/steem-posts.html";
 	$.ajax(theme_template).done(steemPostsTemplateLoaded).fail(function(){
 		// Else use default template
-		$.ajax("/module/steem/steem-posts.html").done(steemPostsTemplateLoaded);
+		$.ajax("./module/steem/steem-posts.html").done(steemPostsTemplateLoaded);
 	});
 }
 loadSteemTemplates();

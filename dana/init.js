@@ -1,13 +1,6 @@
 var config, modules_to_load;
 
 /*** Functions for handling config.json ***/
-// Load config.json
-function getConfigJSON() {
-  return $.ajax({
-    type: 'GET',
-    url: "config.json"
-  });
-}
 // Parse config.json once loaded...
 function parseConfig(config_json) {
   if(typeof config_json ==='string') config_json = JSON.parse(config_json);
@@ -17,6 +10,9 @@ function parseConfig(config_json) {
 // Failed to load config.json
 function configFail() {
   console.log('FAILED TO LOAD CONFIG!');
+	// Load default theme and display error page.
+	config={"sitetitle": "Error loading config","pallete":"vanilla","theme":"simple","modules":["static"],"firstpage":{"type":"static","args":["content/default/config_load_error.html"]},"menu":[]};
+  parseModules(config.modules);
 }
 
 /*** Functions for loading the content modules ***/
@@ -29,6 +25,7 @@ function parseModules(modules_data) {
 		parseModule(moduleItem);
 	}
 	parseTheme(config.theme);
+	parsePallete(config.pallete);
 }
 // Parse an individual module item, load the script...
 function parseModule(module_name) {
@@ -45,6 +42,16 @@ function parseModule(module_name) {
 
 /*** Functions for parsing themes ***/
 // Parse the theme
+function parsePallete(pallete) {
+  // load theme CSS
+  $("<link/>", {
+     rel: "stylesheet",
+     type: "text/css",
+     href: "./pallete/"+pallete+".css"
+  }).appendTo("head");
+}
+/*** Functions for parsing themes ***/
+// Parse the theme
 function parseTheme(theme) {
   getThemeHTML(theme).done(parseThemeHTML).fail(themeHTMLFail);
 
@@ -52,14 +59,14 @@ function parseTheme(theme) {
   $("<link/>", {
      rel: "stylesheet",
      type: "text/css",
-     href: "/theme/"+theme+"/style.css"
+     href: "./theme/"+theme+"/style.css"
   }).appendTo("head");
 }
 // Load the theme template
 function getThemeHTML(theme) {
   return $.ajax({
     type: 'GET',
-    url: "/theme/"+theme+"/template.html"
+    url: "./theme/"+theme+"/template.html"
   });
 }
 // Theme template failed to load...
@@ -68,13 +75,19 @@ function themeHTMLFail() {
 }
 // Parse the theme template
 function parseThemeHTML(themeHTML) {
+	themeHTML = themeHTML.replace(/{sitetitle}/g,config.sitetitle);
   $(document.body).html(themeHTML);
+  if(typeof config.themeoptions == "object" && typeof config.themeoptions.banner_image == "string" && config.themeoptions.banner_image != "") {
+		$('.banner_image').css("background-image",config.themeoptions.banner_image);
+    console.log('banner_image: '+config.themeoptions.banner_image);
+	}
   $('#sitetitle').text(config.sitetitle);
   $('#tagline').text(config.tagline);
   document.title = config.sitetitle;
 
   parseMenu();
 	parseFirstPage();
+	parseSocialMenu();
 }
 
 // Create the Menu
@@ -124,20 +137,62 @@ function parseFirstPage() {
 }
 function getFirstContentModuleFromMenu(menu) {
 		// Look for first content module in menu
-		var arrayLength = menu.length;
+		var arrayLength = config.menu.length;
 		for (var i = 0; i < arrayLength; i++) {
-			if(menu[i].type != 'link') {
-				return menu[i];
+			if(config.menu[i].type != 'link') {
+				return config.menu[i];
 			}
 		}
 		return false;
 }
 
+function parseSocialMenu() {
+	if(config.socialmenu !== null && typeof config.socialmenu === 'object') {
+		var smenu = config.socialmenu;
+		if(typeof smenu.steemit == "string" && smenu.steemit != "") $(".socialmenu .steemit").prop("href",smenu.steemit);
+		else $(".socialmenu .steemit").hide();
 
+		if(typeof smenu.github == "string" && smenu.github != "") $(".socialmenu .github").prop("href",smenu.github);
+		else $(".socialmenu .github").hide();
+
+		if(typeof smenu.facebook == "string" && smenu.facebook != "") $(".socialmenu .facebook").prop("href",smenu.facebook);
+		else $(".socialmenu .facebook").hide();
+
+		if(typeof smenu.twitter == "string" && smenu.twitter != "") $(".socialmenu .twitter").prop("href",smenu.twitter);
+		else $(".socialmenu .twitter").hide();
+
+		if(typeof smenu.gplus == "string" && smenu.gplus != "") $(".socialmenu .gplus").prop("href",smenu.gplus);
+		else $(".socialmenu .gplus").hide();
+
+		if(typeof smenu.linkedin == "string" && smenu.linkedin != "") $(".socialmenu .linkedin").prop("href",smenu.linkedin);
+		else $(".socialmenu .linkedin").hide();
+
+		if(typeof smenu.stackoverflow == "string" && smenu.stackoverflow != "") $(".socialmenu .stackoverflow").prop("href",smenu.stackoverflow);
+		else $(".socialmenu .stackoverflow").hide();
+
+		if(typeof smenu.link_url == "string" && smenu.link_url != "") {
+			$(".socialmenu a.link_url").prop("href",smenu.link_url);
+			var link_url = smenu.link_url.replace(/https\:\/\//g,'');
+			console.log(link_url);
+			$(".socialmenu a.link_url").text(link_url);
+		}	else $(".socialmenu .email").hide();
+
+		if(typeof smenu.email == "string" && smenu.email != "") {
+			$(".socialmenu a.email").prop("href","mailto:"+smenu.email);
+			$(".socialmenu a.email").text(smenu.email);
+		}	else $(".socialmenu .email").hide();
+	} else {
+		$(".socialmenu").hide();
+	}
+}
 
 
 
 // JQuery ready function that is called once document has loaded.
 $(document).ready(function() {
-	getConfigJSON().done(parseConfig).fail(configFail);
+	// Get local config
+	$.ajax("local_config.json").done(parseConfig).fail(function(){
+		// Else load default config on failure
+		$.ajax("config.json").done(parseConfig).fail(configFail);
+	});
 });

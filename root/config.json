@@ -9,15 +9,18 @@
 		"site_image": ""
 	},
 
-	"modules": ["steem","static","link"],
+	"modules": ["static","steem"],
 
-	"firstpage": {"type": "static", "args": ["home.html"]},
+	"steem_options": {
+		"": ""
+	},
+
+	"firstpage": {"type": "static", "args": ["content/default/welcome_to_blockpress.html"]},
 
 	"menu": [
-    {"label": "Blockpress", "type": "static", "args": ["home.html"]},
-	  {"label": "Team", "type": "static", "args": ["team.html"]},
-	  {"label": "Pitch", "type": "static", "args": ["pitch.html"]},
-	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}}
+    {"label": "Home", "type": "static", "args": "content/default/welcome_to_blockpress.html"},
+	  {"label": "Anton's Posts", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress", "count":10}},
+	  {"label": "Dana's Posts", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"blockpress", "count":10}}
   ],
 
 	"socialmenu": {
