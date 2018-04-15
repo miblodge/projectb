@@ -11,7 +11,7 @@ function parseConfig(config_json) {
 function configFail() {
   console.log('FAILED TO LOAD CONFIG!');
 	// Load default theme and display error page.
-	config={"sitetitle": "Error loading config","pallete":"vanilla","theme":"simple","modules":["static"],"firstpage":{"type":"static","args":["content/default/config_load_error.html"]},"menu":[]};
+	config={"sitetitle": "Error loading config","palette":"vanilla","theme":"simple","modules":["static"],"firstpage":{"type":"static","args":["content/default/config_load_error.html"]},"menu":[]};
   parseModules(config.modules);
 }
 
@@ -25,7 +25,7 @@ function parseModules(modules_data) {
 		parseModule(moduleItem);
 	}
 	parseTheme(config.theme);
-	parsePallete(config.pallete);
+	parsePalette(config.palette);
 }
 // Parse an individual module item, load the script...
 function parseModule(module_name) {
@@ -42,12 +42,12 @@ function parseModule(module_name) {
 
 /*** Functions for parsing themes ***/
 // Parse the theme
-function parsePallete(pallete) {
+function parsePalette(palette) {
   // load theme CSS
   $("<link/>", {
      rel: "stylesheet",
      type: "text/css",
-     href: "./pallete/"+pallete+".css"
+     href: "./palette/"+palette+".css"
   }).appendTo("head");
 }
 /*** Functions for parsing themes ***/
@@ -75,11 +75,20 @@ function themeHTMLFail() {
 }
 // Parse the theme template
 function parseThemeHTML(themeHTML) {
+  var banner_image = "";
+  if(typeof config.themeoptions == "object") {
+    if(typeof config.themeoptions.banner_image == "string" && config.themeoptions.banner_image != "") {
+      banner_image = config.themeoptions.banner_image;
+    }
+    if(typeof config.themeoptions.site_image == "string" && config.themeoptions.site_image != "") {
+      themeHTML = themeHTML.replace(/{site-img}/g,config.themeoptions.site_image);
+    }
+  }
 	themeHTML = themeHTML.replace(/{sitetitle}/g,config.sitetitle);
   $(document.body).html(themeHTML);
-  if(typeof config.themeoptions == "object" && typeof config.themeoptions.banner_image == "string" && config.themeoptions.banner_image != "") {
-		$('.banner_image').css("background-image",config.themeoptions.banner_image);
-    console.log('banner_image: '+config.themeoptions.banner_image);
+  if(banner_image != "") {
+  		$('.banner_image').css("background-image",banner_image);
+      console.log('banner_image: '+banner_image);
 	}
   $('#sitetitle').text(config.sitetitle);
   $('#tagline').text(config.tagline);

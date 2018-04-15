@@ -1,12 +1,12 @@
 {
   "sitetitle": "Anton Channing",
   "tagline":"Full Stack Web Developer!",
-	"pallete": "",
+	"palette": "",
   "theme": "anton",
 
 	"themeoptions": {
 		"banner_image": "",
-		"site_image": ""
+		"site_image": "theme/anton/img/anton.jpg"
 	},
 
 	"modules": ["steem","static","link"],
