@@ -1,15 +1,15 @@
 {
   "sitetitle": "Anton Channing",
   "tagline":"Full Stack Web Developer!",
-	"pallete": "",
-  "theme": "anton",
+	"palette": "vanilla",
+  "theme": "trollfell",
 
 	"themeoptions": {
 		"banner_image": "",
 		"site_image": ""
 	},
 
-	"modules": ["steem","static","link"],
+	"modules": ["steem","static"],
 
 	"firstpage": {"type": "static", "args": ["home.html"]},
 
