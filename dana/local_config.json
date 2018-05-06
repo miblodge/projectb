@@ -26,7 +26,7 @@
 		"gplus": "",
 		"stackoverflow": "",
 		"link_url": "http://danavarahi.uk/",
-		"email": "mailto:dana_varahi@protonmail.com"
+		"email": "dana_varahi@protonmail.com"
 	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
