@@ -2,21 +2,21 @@
   "sitetitle": "Anton Channing",
   "tagline":"Full Stack Web Developer",
 
-	"palette": "vanilla",
+	"palette": "pistachiocream",
   "theme": "trollfell",
 
 	"themeoptions": {
-		"banner_image": "",
+		"banner_image": "https://steemitimages.com/2048x512/https://steemitimages.com/DQmWSrqGMDVZYwcXVsD5m1ebyrwiavzGUnsnjb2GNE8kevz/cropped-banner-serpents.png",
 		"site_image": "content/img/anton.jpg"
 	},
 
 	"modules": ["steem","static"],
 
-	"firstpage": {"type": "static", "args": "content/projects.html"},
+	"firstpage": {"type": "steem", "args": {"show":"profile", "user":"antonchanning"}},
 
 	"menu": [
     {"label": "Blog", "type": "steem", "args": {"show":"profile", "user":"antonchanning"}},
-	  {"label": "Projects", "type": "static", "args": "content/projects.html"}
+	  {"label": "Projects", "type": "static", "args": "projects.html"}
   ],
 
 	"socialmenu": {

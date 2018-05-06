@@ -7,8 +7,13 @@ function static_display(content) {
   $('#contentArea').html(content);
 }
 function static_load(file) {
+  pushStateWithoutDuplicate(file, './?p=static/'+file);
   $.ajax({
       type: 'GET',
-      url: file
-  }).done(static_display)
-};
+      url: "content/"+file
+  }).done(static_display);
+}
+function static_permlink(permlink) {
+  permlink = permlink.join("/");
+  static_load(permlink);
+}

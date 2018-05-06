@@ -1,7 +1,7 @@
 {
   "sitetitle": "Blockpress.me",
   "tagline":"The CMS with blockchains for its database...",
-	"palette": "chocorange",
+	"palette": "vanilla",
   "theme": "metaverse",
 
 	"themeoptions": {
@@ -11,18 +11,18 @@
 
 	"modules": ["steem","static"],
 
-	"firstpage": {"type": "static", "args": ["home.html"]},
+	"firstpage": {"type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}},
 
 	"menu": [
-    {"label": "Blockpress", "type": "static", "args": ["home.html"]},
-	  {"label": "Team", "type": "static", "args": ["team.html"]},
-	  {"label": "Pitch", "type": "static", "args": ["pitch.html"]},
+    {"label": "About", "type": "static", "args": "home.html"},
+	  {"label": "Team", "type": "static", "args": "team.html"},
+	  {"label": "Pitch", "type": "static", "args": "pitch.html"},
 	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress"}}
   ],
 
 
 	"socialmenu": {
-		"steemit": "https://steemit.com/trending/blockpress",
+		"steemit": "https://steemit.com/@blockpress",
 		"github": "https://github.com/blockpress/blockpress.me",
 		"linkedin": "",
 		"twitter": "",
@@ -30,7 +30,7 @@
 		"reddit": "https://www.reddit.com/r/blockpressCMS/",
 		"gplus": "",
 		"stackoverflow": "",
-		"link_url": "https://blockpress.me",
+		"link_url": "https://steemit.chat/channel/blockpress",
 		"email": ""
 	},
 

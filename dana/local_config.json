@@ -10,24 +10,23 @@
 
 	"modules": ["steem","static"],
 
-		"firstpage": {"type": "static", "args": ["home.html"]},
+		"firstpage": {"type": "steem", "args": {"show":"profile", "user":"dana-varahi"}},
 
 	"menu": [
-	  {"label": "Home", "type": "static", "args": ["home.html"]},
-		{"label": "Profile", "type": "steem", "args": {"show":"profile", "user":"dana-varahi"}},
-	  {"label": "Blog", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"", "count":10}}
+	  {"label": "About", "type": "static", "args": ["home.html"]},
+		{"label": "Blog", "type": "steem", "args": {"show":"profile", "user":"dana-varahi"}}
   ],
 
 	"socialmenu": {
-		"steemit": "https://steemit.com/trending/blockpress",
-		"github": "https://github.com/blockpress/blockpress.me",
-		"linkedin": "",
-		"twitter": "",
-		"facebook": "",
+		"steemit": "https://steemit.com/@dana-varahi",
+		"github": "https://github.com/DanaVarahi",
+		"linkedin": "https://www.linkedin.com/in/anna-channing-widmanska",
+		"twitter": "https://twitter.com/DanaVarahi",
+		"facebook": "https://facebook.com/danavarahi",
 		"gplus": "",
 		"stackoverflow": "",
-		"link_url": "https://blockpress.me",
-		"email": ""
+		"link_url": "http://danavarahi.uk/",
+		"email": "mailto:dana_varahi@protonmail.com"
 	},
 
 	"dateformat": {"locale": "en-US", "options":{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }}
