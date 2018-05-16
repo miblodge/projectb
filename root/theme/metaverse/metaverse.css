@@ -331,6 +331,13 @@ footer{
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	padding: 0.7em;
+	display:none;
+}
+.steem_posts_dana-varahi {
+	display: block;
+}
+.steem_posts_antonchanning {
+	display:block;
 }
 
 .steem_posts_preview {
