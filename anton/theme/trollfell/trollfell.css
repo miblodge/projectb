@@ -136,7 +136,7 @@ header{
 	margin:0;
 }
 
-div.gradient2 { margin-top: 0;}
+div.pattern1 { margin-top: 0;}
 
 /* Button styles */
 
@@ -167,7 +167,7 @@ button#closeNav{ outline:0;}
 
 /* Menu Styles*/
 
-.menu div{
+.menu2 div{
 	text-align: center;
 	list-style: none;
 	text-align: center;
@@ -178,7 +178,7 @@ button#closeNav{ outline:0;}
 
 }
 
-.menu span{
+.menu2 span{
   display: block;
   font-size: 1.25em;
   text-transform: uppercase;
@@ -187,7 +187,7 @@ button#closeNav{ outline:0;}
 	margin-bottom: 1px;
 }
 
-.menu span a {
+.menu2 span a {
 	text-decoration:none;
 	width: 100%;
 }
@@ -202,13 +202,12 @@ button#closeNav{ outline:0;}
 #sidebar {
     height: 100%;
     width: 300px;
-    position: fixed;
+    position:fixed;
     z-index: 1;
     top: 0;
-    left: 0;
+    left:-300px;
     overflow: hidden;
 		text-align: center;
-		display:none;
 }
 
 #sidebar a {
@@ -223,11 +222,11 @@ button#closeNav{ outline:0;}
 	width:70%;
 	margin-right:auto;
 	margin-left:auto;
-	margin-top: 1em;
 	margin-bottom: 2em;
 	border-style:solid;
 	border-width: 1px;
 	padding:1em;
+	display: block !important;
 }
 
 #contentArea h1{
@@ -418,7 +417,7 @@ button#closeNav{ outline:0;}
 		margin: 0;
 		border: none;
 	}
-	
+
 	/* steem post comments */
 	#steem-post-comments {
 		border-top: 1px solid;

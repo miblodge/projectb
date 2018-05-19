@@ -37,6 +37,16 @@ function parseModule(module_name) {
 	});
 }
 
+// Load theme specific js files
+
+function loadThemeJs(theme_name) {
+  //console.log('Im in')
+	$.getScript("theme/"+theme_name+"/"+theme_name+".js", function( data, textStatus, jqxhr){
+		console.log( "Load was performed for "+theme_name+".");
+	});
+}
+
+
 /*** Functions for parsing themes ***/
 // Parse the theme
 function parsePalette(palette) {
@@ -58,14 +68,19 @@ function parseTheme(theme) {
      type: "text/css",
      href: "./theme/"+theme+"/"+theme+".css"
   }).appendTo("head");
+
+  loadThemeJs(theme);
 }
 // Load the theme template
 function getThemeHTML(theme) {
   return $.ajax({
     type: 'GET',
-    url: "./theme/"+theme+"/template.html"
+    url: "./theme/"+theme+"/"+theme+".html"
   });
 }
+
+
+
 // Theme template failed to load...
 function themeHTMLFail() {
   console.log('FAILED TO LOAD THEME HTML!');
@@ -84,7 +99,7 @@ function parseThemeHTML(themeHTML) {
 	themeHTML = themeHTML.replace(/{sitetitle}/g,config.sitetitle);
   $(document.body).html(themeHTML);
   if(banner_image != "") {
-  		$('.banner_image').css("background-image",banner_image);
+  		$('.banner_image').css("background-image","url("+banner_image+")");
 	}
   $('#sitetitle').text(config.sitetitle);
   $('#tagline').text(config.tagline);
