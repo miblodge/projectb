@@ -15,9 +15,10 @@
 
 	"menu": [
     {"label": "About", "type": "static", "args": "home.html"},
-	  {"label": "Team", "type": "static", "args": "team.html"},
 	  {"label": "Pitch", "type": "static", "args": "pitch.html"},
-	  {"label": "News", "type": "steem", "args": {"show":"posts", "user":"", "tag":"blockpress", "count": "50"}}
+	  {"label": "Team", "type": "static", "args": "team.html"},
+	  {"label": "Dana's Updates", "type": "steem", "args": {"show":"posts", "user":"dana-varahi", "tag":"blockpress", "count": "50"}},
+	  {"label": "Anton's Updates", "type": "steem", "args": {"show":"posts", "user":"antonchanning", "tag":"blockpress", "count": "50"}}
   ],
 
 
