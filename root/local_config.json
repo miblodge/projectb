@@ -11,7 +11,7 @@
 
 	"modules": ["steem","static"],
 
-	"firstpage": {"type": "steem", "args": {"show":"posts", "user":"", "tag":"blockpress", "count": "50"}},
+	"firstpage": {"type": "static", "args": "home.html"},
 
 	"menu": [
     {"label": "About", "type": "static", "args": "home.html"},
